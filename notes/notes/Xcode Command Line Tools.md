@@ -91,3 +91,6 @@ Once you have verified the file contents, execute it locally:
 - **What it does**: Asks Homebrew to print its current version number (e.g., `Homebrew 4.x.x`).
     
 - **Why it's here**: It serves as a **smoke test** to verify that the installation and configuration worked successfully. If it prints a version number, Homebrew is fully operational.
+
+`echo $PATH` :  ==This is the correct, universal command to check your environment path.==
+In Linux and Unix-like operating systems (such as macOS), environment variables are case-sensitive. The command **`echo $path`** (lowercase) is often empty, whereas **`echo $PATH`** (uppercase) is the correct command used to display your system's executable search directories
