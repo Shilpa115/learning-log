@@ -94,3 +94,29 @@ Once you have verified the file contents, execute it locally:
 
 `echo $PATH` :  ==This is the correct, universal command to check your environment path.==
 In Linux and Unix-like operating systems (such as macOS), environment variables are case-sensitive. The command **`echo $path`** (lowercase) is often empty, whereas **`echo $PATH`** (uppercase) is the correct command used to display your system's executable search directories
+
+The standard output of `$PATH` can be messy and hard to read. To view your directories formatted cleanly on separate lines, you can pipe the output through `tr` or use `printenv`
+
+`tr ':' '\n' <<< "$PATH"`
+
+## Development Toolchain
+
+**`brew install git cmake ninja llvm gcc ccache gh \`**
+**`googletest google-benchmark boost libomp`**
+
+This command uses Home brew to install a **comprehensive C/C++ development toolchain**.
+#### *1. Version Control & Collaboration*
+
+- **`git`**: The industry-standard version control system for tracking changes in source code and collaborating with teams. _(Note: macOS has a built-in version of git, but Homebrew's version is usually more up-to-date).
+- **`gh`**: GitHub’s official command-line tool. It lets you manage pull requests, issues, repositories, and workflows directly from your terminal without opening a browser.
+#### *2. Build Systems*
+
+- **`cmake`**: A cross-platform build system generator. Instead of writing complex Makefiles manually for every operating system, developers write a `CMakeLists.txt` file, and CMake generates the native build files for your system.
+- **`ninja`**: A small, ultra-fast build system designed to focus on speed (often used as the backend runner for CMake instead of traditional `make`).
+
+#### *3. Compilers & Performance*
+
+- **`llvm`**: The LLVM compiler infrastructure, which includes **Clang** (the modern C/C++ compiler used by default on macOS). Installing it via Homebrew gives you the absolute latest version rather than Apple's older bundled version.
+- **`gcc`**: The GNU Compiler Collection, another major industry-standard compiler required by certain legacy or cross-platform codebases that rely on GNU-specific extensions.
+- **`ccache`**: A compiler cache. It speeds up recompilation by caching previous compilations and detecting when the same code is being compiled again, saving massive amounts of time on large projects.
+- **`libomp`**: The official LLVM OpenMP runtime library, which allows developers to write multi-threaded, parallelized code that utilizes all CPU cores efficiently.
