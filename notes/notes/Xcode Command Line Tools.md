@@ -63,3 +63,31 @@ Once you have verified the file contents, execute it locally:
 
 - **Transport Security (HTTPS):** Using `https://` ensures that the connection to GitHub is encrypted via TLS, meaning your internet service provider or someone on your local Wi-Fi cannot tamper with the script _in transit_ (Man-in-the-Middle attack).
 - **Code Audit-ability:** By saving the file locally first, you can read every line of code the installer will run with root privileges before it touches your system.
+
+## Home-brew Installation 
+
+### Line-by-Line Breakdown
+
+#### Line 1: `echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> ~/.zprofile`
+
+- **`echo '...'`**: Prints the text inside the quotes.
+    
+- **`>> ~/.zprofile`**: Appends (adds) that text to your user profile file (`.zprofile`). On modern macOS, Zsh is the default shell, and `.zprofile` runs every time you open a new terminal window.
+    
+- **What it adds permanently**: It saves the command `eval "$(/opt/homebrew/bin/brew shellenv)"` so that every future terminal session automatically configures Homebrew.
+    
+
+#### Line 2: `eval "$(/opt/homebrew/bin/brew shellenv)"`
+
+- **What it does**: Executes that configuration command **immediately** in your current terminal session.
+    
+- **Why it's needed**: Without this line, you would have to close and reopen your terminal (or restart your Mac) for Line 1 to take effect. This activates Homebrew right now.
+    
+- **What `shellenv` does**: It tells Homebrew to set up critical environment variables (like updating your `PATH` variable so your system knows to look inside `/opt/homebrew/bin` when you type `brew`).
+    
+
+#### Line 3: `brew --version`
+
+- **What it does**: Asks Homebrew to print its current version number (e.g., `Homebrew 4.x.x`).
+    
+- **Why it's here**: It serves as a **smoke test** to verify that the installation and configuration worked successfully. If it prints a version number, Homebrew is fully operational.
